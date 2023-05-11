@@ -24,27 +24,18 @@
         <Label Content="Size" Grid.Column="1" FontSize="28" FontFamily="Arial"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <Label Content="Properties" Grid.Column="2" FontSize="28" FontFamily="Arial"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-        
-        <ComboBox FontSize="20" x:Name="fontStyle" Grid.Row="1" Grid.Column="0" Margin="20" SelectionChanged="fontChange">
-            <ComboBoxItem>
-                
-            </ComboBoxItem>
-        </ComboBox>
-        
-        <ComboBox FontSize="20" x:Name="size" Grid.Row="1" Grid.Column="1" Margin="20">
-            <ComboBoxItem>
 
-            </ComboBoxItem>
-        </ComboBox>
-        
-        <ComboBox FontSize="20" x:Name="properties" Grid.Row="1" Grid.Column="2" Margin="20">
-            <ComboBoxItem>
-
-            </ComboBoxItem>
-        </ComboBox>
+        <ComboBox FontSize="20" x:Name="fontStyle" Grid.Row="1" Grid.Column="0" Margin="20" SelectionChanged="fontChange"/>
 
 
-        <Label x:Name="label" Content="Example" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <ComboBox FontSize="20" x:Name="fontSize" Grid.Row="1" Grid.Column="1" Margin="20" SelectionChanged="sizeChange"/>
+
+
+        <ComboBox FontSize="20" x:Name="fontProperties" Grid.Row="1" Grid.Column="2" Margin="20" SelectionChanged="propertiesChange"/>
+
+
+
+        <Label x:Name="example" Content="Example" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20"/>
 
     </Grid>
 </Window>

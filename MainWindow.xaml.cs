@@ -23,34 +23,67 @@ namespace LABA_11
         public MainWindow()
         {
             InitializeComponent();
-            this.fontStyle.Items.Add(new Label { Content = "Arial" });
-            this.fontStyle.Items.Add(new Label { Content = "MS Sans Serif" });
-            this.fontStyle.Items.Add(new Label { Content = "Times New Roman" });
 
             for (int i = 1; i<=100; i++)
             {
-                this.size.Items.Add(new Label { Content = $"{i}" });
+                fontSize.Items.Add(new Label { Content = $"{i}" });
             }
 
-            this.properties.Items.Add(new Label { Content = "Italic" });
-            this.properties.Items.Add(new Label { Content = "Bold" });
-            this.properties.Items.Add(new Label { Content = "Underlined" });
-            this.properties.Items.Add(new Label { Content = "Strikethrough" });
+            fontStyle.ItemsSource = new Label[]
+            {
+                new Label { Content = "Arial" },
+                new Label { Content = "MS Sans Serif" },
+                new Label { Content = "Times New Roman" },
+                new Label { Content = "Lucida Console" }
+            };
+
+            fontProperties.ItemsSource = new Label[]
+            {
+                new Label { Content = "Doesn't work" },
+                new Label { Content = "Italic" },
+                new Label { Content = "Bold" },
+                new Label { Content = "Underline" },
+                new Label { Content = "Strikethrough" }
+            };
+
+            fontProperties.SelectedIndex = 0;
         }
 
-        private void fontChange (Object sender, RoutedEventArgs e)
+        private void fontChange(Object sender, RoutedEventArgs e)
         {
-            ComboBox fontList = (ComboBox)sender;
-            ComboBoxItem selectedItem = (ComboBoxItem)fontList.SelectedItem;
-            string value = fontList.Text;
+            string[] splitted = fontStyle.SelectedItem.ToString().Split(" ");
+            int index = splitted.Length - 1;
+            string style = splitted[index];
 
-            MessageBox.Show(value);
+            switch (style) {
+
+                case "Serif": example.FontFamily = new FontFamily("MS Sans Serif"); break;
+
+                case "Arial": example.FontFamily = new FontFamily("Arial"); break;
+
+                case "Roman": example.FontFamily = new FontFamily("Times New Roman"); break;
+
+                case "Console":  example.FontFamily = new FontFamily("Lucida Console"); break;
+            }
+            
+        }
+
+        private void sizeChange(object sender, SelectionChangedEventArgs e)
+        {
+            string[] splitted = fontSize.SelectedItem.ToString().Split(" ");
+            int index = splitted.Length - 1;
+            string size = splitted[index];
+
+            example.FontSize = double.Parse(size);
         }
 
 
 
-
-
-        
+        private void propertiesChange(object sender, SelectionChangedEventArgs e)
+        {
+            string[] splitted = fontProperties.SelectedItem.ToString().Split(" ");
+            int index = splitted.Length - 1;
+            string property = splitted[index];
+        }
     }
 }
