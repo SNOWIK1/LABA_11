@@ -24,7 +24,7 @@ namespace LABA_11
         {
             InitializeComponent();
 
-            for (int i = 1; i<=100; i++)
+            for (int i = 1; i<=72; i++)
             {
                 fontSize.Items.Add(new Label { Content = $"{i}" });
             }
@@ -39,14 +39,11 @@ namespace LABA_11
 
             fontProperties.ItemsSource = new Label[]
             {
-                new Label { Content = "Doesn't work" },
-                new Label { Content = "Italic" },
                 new Label { Content = "Bold" },
                 new Label { Content = "Underline" },
                 new Label { Content = "Strikethrough" }
             };
 
-            fontProperties.SelectedIndex = 0;
         }
 
         private void fontChange(Object sender, RoutedEventArgs e)
@@ -84,6 +81,21 @@ namespace LABA_11
             string[] splitted = fontProperties.SelectedItem.ToString().Split(" ");
             int index = splitted.Length - 1;
             string property = splitted[index];
+
+            switch (property)
+            {
+                case "Underline": example.TextDecorations = TextDecorations.Underline; break;
+                case "Strikethrough": example.TextDecorations = TextDecorations.Strikethrough; break;
+                case "Bold": example.FontWeight = FontWeights.Bold; break;
+            }
+        }
+
+
+        private void task2(object sender, RoutedEventArgs e)
+        {
+            Orders task2 = new Orders();
+            task2.Show();
+            this.Close();
         }
     }
 }
