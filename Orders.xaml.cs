@@ -23,66 +23,84 @@ namespace LABA_11
         {
             InitializeComponent();
 
-            games.ItemsSource = new TextBlock[]
+            games.ItemsSource = new string[]
             {
-                new TextBlock {Text = "Left 4 Dead"},
-                new TextBlock {Text = "Call of Duty WW2"},
-                new TextBlock {Text = "Call of Duty Modern Warfare"},
-                new TextBlock {Text = "S.T.A.L.K.E.R. Тень Чернобыля"},
-                new TextBlock {Text = "S.T.A.L.K.E.R. Чистое небо"},
-                new TextBlock {Text = "S.T.A.L.K.E.R. Вариант Омега"},
-                new TextBlock {Text = "S.T.A.L.K.E.R. Зов Припяти"},
-                new TextBlock {Text = "S.T.A.L.K.E.R. Dead Air"},
-                new TextBlock {Text = "S.T.A.L.K.E.R. Anomaly"},
-                new TextBlock {Text = "The Forest"},
-                new TextBlock {Text = "The Elder Scrolls IV: Oblivion"},
-                new TextBlock {Text = "The Elder Scrolls V: Skyrim"},
-                new TextBlock {Text = "Magicka"},
-                new TextBlock {Text = "Dragon Age Origins"},
-                new TextBlock {Text = "Age of Civilizations II"},
-                new TextBlock {Text = "Fallout: New Vegas"}
+                "Left 4 Dead",
+                "Call of Duty WW2",
+                "Call of Duty Modern Warfare",
+                "S.T.A.L.K.E.R. Тень Чернобыля",
+                "S.T.A.L.K.E.R. Чистое небо",
+                "S.T.A.L.K.E.R. Вариант Омега",
+                "S.T.A.L.K.E.R. Зов Припяти",
+                "S.T.A.L.K.E.R. Dead Air",
+                "S.T.A.L.K.E.R. Anomaly",
+                "The Forest",
+                "The Elder Scrolls IV: Oblivion",
+                "The Elder Scrolls V: Skyrim",
+                "Magicka",
+                "Dragon Age Origins",
+                "Age of Civilizations II",
+                "Fallout: New Vegas"
              };
 
-            education.ItemsSource = new TextBlock[]
+            education.ItemsSource = new string[]
             {
-                new TextBlock {Text = "Массаж"},
-                new TextBlock {Text = "Бокс"},
-                new TextBlock {Text = "Зоопарк для малышей"},
-                new TextBlock {Text = "Йога"},
-                new TextBlock {Text = "Формула безопасности"},
-                new TextBlock {Text = "Плетение фенечек из бисера"},
-                new TextBlock {Text = "Веревочный массаж"},
-                new TextBlock {Text = "Учим цифры"},
-                new TextBlock {Text = "Школа Тенниса"},
-                new TextBlock {Text = "Боевое самбо"},
-                new TextBlock {Text = "Гадание на домино"},
-                new TextBlock {Text = "Спортивный туризм"}
+                "Массаж",
+                "Бокс",
+                "Зоопарк для малышей",
+                "Йога",
+                "Формула безопасности",
+                "Плетение фенечек из бисера",
+                "Веревочный массаж",
+                "Учим цифры",
+                "Школа Тенниса",
+                "Боевое самбо",
+                "Гадание на домино",
+                "Спортивный туризм"
             };
 
         }
 
+        void NumberOfOrders()
+        {
+            if (orders.Items.Count != 0)
+            {
+                numberOfOrders.Content = $"Количество заказов: {orders.Items.Count}";
+            }
+            else if (orders.Items.Count == 0)
+            {
+                numberOfOrders.Content = "";
+            }
+        }
+
         private void AddtoOrder(object sender, RoutedEventArgs e)
         {
-            var gamesItem = games.SelectedItem;
-            var educationItem = education.SelectedItem;
-
-
-            if (gamesItem is not null)
+            string selectedGame = games.SelectedItem as string;
+            string selectedEdu = education.SelectedItem as string;
+            
+            if (selectedGame != null)
             {
-                orders.Items.Add(games.SelectedItem);
+                orders.Items.Add(selectedGame);
                 games.SelectedItem = null;
             }
-
-            if (educationItem is not null)
+            else if (selectedEdu != null)
             {
-                orders.Items.Add(education.SelectedItem);
+                orders.Items.Add(selectedEdu);
+                education.SelectedItem = null;
             }
+            else
+            {
+                MessageBox.Show("Не выбрано ни одного элемента!", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+            NumberOfOrders();
 
         }
 
         private void DeleteFromOrder(object sender, RoutedEventArgs e)
         {
             orders.Items.Remove(orders.SelectedItem);
+            NumberOfOrders();
         }
     }
 }
